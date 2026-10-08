@@ -634,3 +634,114 @@ body {
     font-size: 11px;
   }
 }
+.llm-panel {
+  border-top: 1px solid #e9dfd0;
+  padding-top: 18px;
+  margin-top: 18px;
+}
+.llm-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.llm-head .eyebrow {
+  margin-bottom: 0;
+}
+.llm-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.llm-actions .secondary {
+  font-size: 11px;
+  padding: 7px 10px;
+  min-height: 30px;
+  border-color: #e1ceb4;
+  background: #fbf5ea;
+}
+.llm-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #a38158;
+  margin-top: 12px;
+}
+.llm-result {
+  margin-top: 12px;
+  background: #faf5eb;
+  border: 1px solid #eadbc4;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.llm-result strong {
+  display: block;
+  font-size: 11px;
+  color: #a38158;
+  margin-bottom: 8px;
+}
+.llm-result p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.9;
+  font-size: 13px;
+  color: #695239;
+}
+.llm-settings {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  padding: 7px 10px;
+  min-height: 30px;
+  border: 1px solid #e1ceb4;
+  background: #fbf5ea;
+  color: #a38158;
+  border-radius: 22px;
+}
+.llm-settings:hover,
+.llm-settings.active {
+  background: #efe1cb;
+}
+.llm-config {
+  margin-top: 14px;
+  border: 1px solid #eadbc4;
+  border-radius: 10px;
+  background: #fdf9f1;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+.llm-config-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #927a60;
+}
+.llm-config-row input,
+.llm-config-row select {
+  padding: 8px 10px;
+  border: 1px solid #dfd1bc;
+  border-radius: 6px;
+  background: #fffdf8;
+  color: #695239;
+  font-size: 12px;
+  min-width: 0;
+}
+.llm-config-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.llm-config-foot .primary {
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 22px;
+}
+.llm-config-foot .muted {
+  font-size: 11px;
+}

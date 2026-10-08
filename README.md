@@ -7,6 +7,7 @@
 - 拖入或选择 MP3、WAV、M4A、MP4、FLAC、OGG、WebM，上传前可预听。
 - 自动发现本机模型目录中的 `.pt` 文件，每个任务可独立选择模型。
 - 查看全文和字幕时间轴，导出 TXT、SRT、VTT、JSON。
+- 转写完成后可用 AI 润色字幕、生成摘要或翻译（可选，任意 OpenAI 兼容接口）。
 - 本机任务队列、进度显示、取消、失败重试和历史记录。
 - 默认单文件最大 1 GB、媒体最长 30 分钟，均在本机处理。
 
@@ -52,6 +53,18 @@ New-Item -ItemType Directory -Force models
 
 随后把 `.env` 中的 `WHISPER_MODEL` 改成 `models/small.pt`。模型文件通常很大，已被 `.gitignore` 排除，不应提交到 GitHub。
 
+## AI 后处理（可选）
+
+转写完成后，可以在结果面板里对文本做「润色字幕」「生成摘要」或「翻译」。这些功能使用任意 OpenAI 兼容接口，在 `.env` 里配置：
+
+```dotenv
+LLM_BASE_URL=https://api.deepseek.com/v1
+LLM_API_KEY=sk-你的密钥
+LLM_MODEL=deepseek-chat
+```
+
+不配置这三项时，转写功能照常工作，页面不显示 AI 后处理入口。翻译方向会自动判断：源语言为中文时翻成英文，否则翻成中文。
+
 ## 启动
 
 ```powershell
@@ -73,4 +86,4 @@ npm run build
 
 数据库、上传文件、识别结果和日志保存在 `data/`。`.env`、`data/`、`models/`、`.venv/` 和 `*.pt` 均被 Git 忽略，不会随正常的 `git add .` 上传。服务只监听 `127.0.0.1`。
 
-前端入口为 `web/main.tsx`，服务端入口为 `server/main.ts`，Whisper 子进程为 `worker/transcribe.py`。接口说明见 `docs/API.md`，设计说明见 `docs/ENGINEERING.md`。
+前端入口为 `web/main.tsx`（页面组件在 `web/components/`，工具与类型在 `web/lib/`），服务端入口为 `server/main.ts`（路由在 `server/routes.ts`，数据层在 `server/db.ts`，共享错误处理在 `server/http.ts`），Whisper 子进程为 `worker/transcribe.py`。接口说明见 `docs/API.md`，设计说明见 `docs/ENGINEERING.md`。

@@ -4,10 +4,11 @@ import express from 'express';
 import { Store } from './db.ts';
 import { createApp } from './app.ts';
 import { Transcriber } from './worker.ts';
+
 if (existsSync('.env')) process.loadEnvFile('.env');
-const mode: 'tickets' | 'transcribe' = 'transcribe';
+
 const port = Number(process.env.PORT || process.env.TRANSCRIBE_PORT || 4320);
-const dir = path.resolve(process.env.DATA_DIR || `data/${mode}`);
+const dir = path.resolve(process.env.DATA_DIR || 'data/transcribe');
 mkdirSync(dir, { recursive: true });
 const lock = path.join(dir, 'server.lock');
 if (existsSync(lock)) {
@@ -25,13 +26,12 @@ if (existsSync(lock)) {
 writeFileSync(lock, String(process.pid), { flag: 'wx' });
 const store = new Store(dir);
 
-const app = createApp(store);
 const worker = process.env.DISABLE_WORKER !== '1' ? new Transcriber(store) : undefined;
-if (worker) app.locals.workerStatus = worker.status;
+const app = createApp(store, () => worker?.status());
 app.use(express.static(path.resolve('dist')));
 app.get('/{*path}', (_req, res) => res.sendFile(path.resolve('dist/index.html')));
 const server = app.listen(port, '127.0.0.1', () => {
-  console.log(`${mode}: http://127.0.0.1:${port}`);
+  console.log(`transcribe: http://127.0.0.1:${port}`);
   worker?.start();
 });
 server.once('error', (e) => {

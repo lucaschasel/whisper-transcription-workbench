@@ -7,8 +7,8 @@
     "node": ">=24.0.0"
   },
   "scripts": {
-    "dev:transcribe": "tsx server/main.ts transcribe",
-    "start": "node scripts/launch.mjs transcribe",
+    "dev": "tsx server/main.ts",
+    "start": "node scripts/launch.mjs",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test --test-concurrency=1 tests/*.test.ts",
